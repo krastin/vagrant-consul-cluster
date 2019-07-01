@@ -1,0 +1,20 @@
+{
+    "service": {
+        "id": "web",
+        "name": "web",
+        "tags": ["web","public"],
+        "port": 80,
+        "meta": {
+            "desc": "service meta description",
+            "owner": "myself",
+            "etc": "etcetera"
+        },
+        "enable_tag_override": false,
+        "checks": [
+            {
+                "args": ["curl", "localhost"],
+                "interval": "5s"
+            }
+        ]
+    }
+}
