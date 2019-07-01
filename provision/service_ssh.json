@@ -1,0 +1,16 @@
+{
+    "service": {
+        "name": "ssh",
+        "tags": [
+            "ssh",
+            "public"
+        ],
+        "port": 22,
+        "checks": [
+            {
+                "args": ["echo", "ToDo"],
+                "interval": "20s"
+            }
+        ]
+    }
+}
