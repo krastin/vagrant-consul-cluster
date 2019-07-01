@@ -12,8 +12,11 @@
         "enable_tag_override": false,
         "checks": [
             {
-                "args": ["curl", "localhost"],
-                "interval": "5s"
+                "id": "web",
+                "http": "http://localhost/",
+                "interval": "5s",
+                "method": "GET",
+                "timeout": "1s"
             }
         ]
     }

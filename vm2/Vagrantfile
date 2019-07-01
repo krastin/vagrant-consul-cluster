@@ -79,5 +79,6 @@ node_name = "vm2"
 EOF
 
   systemctl restart consul
+  echo "curl 'http://localhost:8500/v1/agent/checks' -G --data-urlencode 'filter=Status != passing'" > ~vagrant/show_failing_checks.sh
   SHELL
 end
