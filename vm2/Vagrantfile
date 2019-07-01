@@ -86,5 +86,6 @@ EOF
 	}
 }
 EOF
+  systemctl restart consul
   SHELL
 end
