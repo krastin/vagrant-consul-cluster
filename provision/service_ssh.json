@@ -8,8 +8,10 @@
         "port": 22,
         "checks": [
             {
-                "args": ["echo", "ToDo"],
-                "interval": "20s"
+                "id": "ssh",
+                "tcp": "localhost:22",
+                "interval": "20s",
+                "timeout": "1s"
             }
         ]
     }
