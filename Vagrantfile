@@ -8,9 +8,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "xenial-consul"
 
-  config.vm.provision "file", source: "../provision/service_web.json", destination: "/tmp/etc/consul.d/service_web.json"
-  config.vm.provision "file", source: "../provision/service_ssh.json", destination: "/tmp/etc/consul.d/service_ssh.json"
-  config.vm.provision "file", source: "../provision/server.hcl", destination: "/tmp/etc/consul.d/server.hcl"
+  config.vm.provision "file", source: "conf/service_web.json", destination: "/tmp/etc/consul.d/service_web.json"
+  config.vm.provision "file", source: "conf/service_ssh.json", destination: "/tmp/etc/consul.d/service_ssh.json"
+  config.vm.provision "file", source: "conf/server.hcl", destination: "/tmp/etc/consul.d/server.hcl"
 
   config.vm.define "consul01" do |consul01|
     consul01.vm.hostname = "consul01"
