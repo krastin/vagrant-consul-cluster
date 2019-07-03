@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "xenial-consul"
+  config.vm.box = "krastin/xenial-consul"
 
   (1..3).each do |i|
     config.vm.define "consul0#{i}" do |consul|
