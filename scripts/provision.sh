@@ -1,7 +1,10 @@
-mv /tmp/etc/consul.d/* /etc/consul.d/
-echo '' > /etc/consul.d/client.hcl
-echo "retry_join = [\"$BUDDYIPADDR\"]" >> /etc/consul.d/client.hcl
-echo "bind_addr = \"$IPADDR\"" >> /etc/consul.d/client.hcl
-echo "node_name = \"$NODENAME\"" >> /etc/consul.d/client.hcl
+#!/usr/bin/env bash
+
+mkdir -p /etc/consul.d/
+mv /vagrant/conf/* /etc/consul.d/
+cat > /etc/consul.d/client.hcl <<EOF
+retry_join = ["${BUDDYIPADDR}"]
+bind_addr = "${IPADDR}"
+node_name = "${NODENAME}"
+EOF
 systemctl restart consul
-echo "curl 'http://localhost:8500/v1/agent/checks' -G --data-urlencode 'filter=Status != passing'" > ~vagrant/show_failing_checks.sh
