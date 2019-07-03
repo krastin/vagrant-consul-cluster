@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "xenial-consul"
+  config.vm.provision "file", source: "../provision/service_web.json", destination: "/tmp/etc/consul.d/service_web.json"
+  config.vm.provision "file", source: "../provision/service_ssh.json", destination: "/tmp/etc/consul.d/service_ssh.json"
+  config.vm.provision "file", source: "../provision/server.hcl", destination: "/tmp/etc/consul.d/server.hcl"
+
+
+  config.vm.define "consul01" do |consul01|
+    consul01.vm.hostname = "consul01"
+    consul01.vm.network "private_network", ip: "10.10.10.11",
+      virtualbox__intnet: "consul"
+    consul01.vm.provision "shell", inline: <<-SHELL
+      mv /tmp/etc/consul.d/* /etc/consul.d/
+      cat <<EOF > /etc/consul.d/client.hcl
+retry_join = ["10.10.10.12"]
+bind_addr = "10.10.10.11"
+node_name = "consul01"
+EOF
+
+  systemctl restart consul
+  echo "curl 'http://localhost:8500/v1/agent/checks' -G --data-urlencode 'filter=Status != passing'" > ~vagrant/show_failing_checks.sh
+  SHELL
+
+  end
+
+  config.vm.define "consul02" do |consul02|
+    consul02.vm.hostname = "consul02"
+    consul02.vm.network "private_network", ip: "10.10.10.12",
+      virtualbox__intnet: "consul"
+    consul02.vm.provision "shell", inline: <<-SHELL
+      mv /tmp/etc/consul.d/* /etc/consul.d/
+      cat <<EOF > /etc/consul.d/client.hcl
+retry_join = ["10.10.10.11"]
+bind_addr = "10.10.10.12"
+node_name = "consul02"
+EOF
+
+  systemctl restart consul
+  echo "curl 'http://localhost:8500/v1/agent/checks' -G --data-urlencode 'filter=Status != passing'" > ~vagrant/show_failing_checks.sh
+  SHELL
+
+  end
+
+  config.vm.define "consul03" do |consul03|
+    consul03.vm.hostname = "consul03"
+    consul03.vm.network "private_network", ip: "10.10.10.13",
+      virtualbox__intnet: "consul"
+    consul03.vm.provision "shell", inline: <<-SHELL
+      mv /tmp/etc/consul.d/* /etc/consul.d/
+      cat <<EOF > /etc/consul.d/client.hcl
+retry_join = ["10.10.10.11"]
+bind_addr = "10.10.10.13"
+node_name = "consul03"
+EOF
+
+  systemctl restart consul
+  echo "curl 'http://localhost:8500/v1/agent/checks' -G --data-urlencode 'filter=Status != passing'" > ~vagrant/show_failing_checks.sh
+  SHELL
+
+  end
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+  # config.vm.network "public_network"
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+end
