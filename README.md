@@ -2,7 +2,7 @@
 A small consul cluster of three xenial VMs with vagrant
 
 # How to use
-    cd vm1
+    cd VMs
     vagrant up
 
 # To Do
