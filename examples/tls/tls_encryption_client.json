@@ -1,0 +1,13 @@
+{
+  "verify_incoming": true,
+  "ca_file": "/etc/consul.d/consul-agent-ca.pem",
+  "cert_file": "/etc/consul.d/dc1-client-consul.pem",
+  "key_file": "/etc/consul.d/dc1-client-consul-key.pem",
+  "auto_encrypt": {
+    "tls": true
+  },
+  "ports": {
+    "http": -1,
+    "https": 8501
+  }
+}
