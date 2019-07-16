@@ -1,0 +1,4 @@
+All security related functionality is for lab purpose only.
+The current security practices and implementations would not be sufficient for a production setup.
+Consul(t) with your security engineer for further info.
+You have been warned.
