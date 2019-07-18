@@ -1,15 +1,29 @@
 # vagrant-consul-cluster
-A small consul cluster of three xenial VMs with vagrant
+A small consul cluster of six xenial VMs with vagrant
+
+# Layout
+## Datacenter 1 (dc1)
+
+- consul01
+- consul02
+- consul03
+- revproxy01
+
+## Datacenter 2 (dc2)
+
+- consul11
+- consul12
 
 # How to use
 ## Create VMs
-### all three VMs
+### all VMs
     vagrant up
 
 ### specific VMs
     vagrant up consul01
     vagrant up consul02
     vagrant up consul03
+    ...
     
 ## Delete VMs
     vagrant destroy
