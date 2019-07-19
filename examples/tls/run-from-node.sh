@@ -10,9 +10,9 @@ consul tls ca create
 
 # generate three keys for our servers
 echo 'Creating 3 TLS server keys'
-consul tls cert create -server
-consul tls cert create -server
-consul tls cert create -server
+consul tls cert create -server -additional-ipaddress '10.10.10.11'
+consul tls cert create -server -additional-ipaddress '10.10.10.12'
+consul tls cert create -server -additional-ipaddress '10.10.10.13'
 
 # generate one key for our client
 echo 'Creating 1 TLS client key'

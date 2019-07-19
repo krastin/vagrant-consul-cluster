@@ -1,0 +1,11 @@
+Run setup_query.sh on a single server node in each DC, it will propagate to other server nodes within the DC.
+Then run 'apt install -y nginx' on a bunch of nodes in each DC you want to include in the test.
+
+check availability of services using the prepared query
+$ dig web-app.query.consul @127.0.0.1 -p 8600
+
+stop all web servers in one DC
+$ sudo systemctl stop nginx
+
+check the service again, it should point to the other DC
+$ dig web-app.query.consul @127.0.0.1 -p 8600
