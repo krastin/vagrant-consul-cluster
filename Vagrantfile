@@ -25,6 +25,8 @@ Vagrant.configure("2") do |config|
         env: {"PRODUCT" => "envconsul"}
       consul.vm.provision "shell", path: "scripts/install_product.sh",
         env: {"PRODUCT" => "consul-template"}
+      consul.vm.provision "shell", path: "scripts/install_product.sh",
+        env: {"PRODUCT" => "consul", "VERSION" => "1.4.2+ent"}
     end
   end
 

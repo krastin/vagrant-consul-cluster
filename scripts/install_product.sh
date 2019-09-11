@@ -6,7 +6,9 @@ if [ ! "$PRODUCT" ] ; then
   exit 1
 fi
 
-VERSION=`curl -sL https://releases.hashicorp.com/${PRODUCT}/index.json | jq -r '.versions[].version' | sort -V | egrep -v 'ent|beta|rc|alpha' | tail -1`
+if [ -z "$VERSION" ] ; then
+  VERSION=`curl -sL https://releases.hashicorp.com/${PRODUCT}/index.json | jq -r '.versions[].version' | sort -V | egrep -v 'ent|beta|rc|alpha' | tail -1`
+fi
 
 which ${PRODUCT} || {
   cd /usr/local/bin
